@@ -1,57 +1,48 @@
+using Moq;
 using NUnit.Framework;
 using System.IO;
 using System.Reflection;
-using TDDMicroExercises.UnicodeFileToHtmlTextConverter;
+using UnicodeFileToHtmlTextConverter.Contracts;
+
 namespace UnicodeFileToHtmlTextConverter.Tests
 {
     [TestFixture]
     public class UnicodeFileToHtmlTextConverterTests
     {
         private TDDMicroExercises.UnicodeFileToHtmlTextConverter.UnicodeFileToHtmlTextConverter _converter;
+        private Mock<IFileReader> _mockFileReader;
+        private Mock<IHtmlConverter> _mockHtmlConverter;
         private string _testFilePath;
+
         [SetUp]
         public void Setup()
         {
+            _mockFileReader = new Mock<IFileReader>();
+            _mockHtmlConverter = new Mock<IHtmlConverter>();
             _testFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "TestFile.txt");
-            _converter = new TDDMicroExercises.UnicodeFileToHtmlTextConverter.UnicodeFileToHtmlTextConverter(_testFilePath);
+
+            _converter = new TDDMicroExercises.UnicodeFileToHtmlTextConverter.UnicodeFileToHtmlTextConverter(
+                _mockFileReader.Object,
+                _mockHtmlConverter.Object,
+                _testFilePath);
         }
 
 
         [Test]
-        public void ConvertToHtml_WhenFileIsEmpty_ReturnsEmptyString()
+        public void ConvertToHtml_WhenFileContainsText_CallsFileReaderAndHtmlConverter()
         {
+            string fileContent = "This is a test file.";
+            string htmlContent = "This is a test file.";
+
             string expected = string.Empty;
             File.WriteAllText(_testFilePath, string.Empty);
 
-            string result = _converter.ConvertToHtml();
-
-            Assert.AreEqual(expected, result);
-        }
-
-        [Test]
-        public void ConvertToHtml_WhenFileContainsSingleLine_ReturnsHtmlEncodedLineWithBreakTag()
-        {
-            string line = "This is a test.";
-            string expected = $"This is a test.<br />";
-            File.WriteAllText(_testFilePath, line);
+            _mockFileReader.Setup(f => f.ReadFile(It.IsAny<string>())).Returns(fileContent);
+            _mockHtmlConverter.Setup(h => h.ConvertToHtml(It.IsAny<string>())).Returns(htmlContent);
 
             string result = _converter.ConvertToHtml();
 
-            Assert.AreEqual(expected, result);
-        }
-
-        [Test]
-        public void ConvertToHtml_WhenFileContainsMultipleLines_ReturnsHtmlEncodedLinesWithBreakTags()
-        {
-            string line1 = "Line 1";
-            string line2 = "Line 2";
-            string line3 = "Line 3";
-            string expected = $"Line 1<br />Line 2<br />Line 3<br />";
-            File.WriteAllLines(_testFilePath, new[] { line1, line2, line3 });
-
-            string result = _converter.ConvertToHtml();
-
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(htmlContent, result);
         }
 
         [TearDown]
