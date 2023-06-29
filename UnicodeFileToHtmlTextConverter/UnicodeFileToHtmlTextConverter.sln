@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnicodeFileToHtmlTextConverter", "UnicodeFileToHtmlTextConverter\UnicodeFileToHtmlTextConverter.csproj", "{21C37E79-B144-4A22-8209-069DCD90538A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnicodeFileToHtmlTextConverter.Tests", "UnicodeFileToHtmlTextConverter.Tests\UnicodeFileToHtmlTextConverter.Tests.csproj", "{E5B252BA-ECAC-4372-93F2-B55764462246}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21C37E79-B144-4A22-8209-069DCD90538A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C37E79-B144-4A22-8209-069DCD90538A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C37E79-B144-4A22-8209-069DCD90538A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C37E79-B144-4A22-8209-069DCD90538A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5B252BA-ECAC-4372-93F2-B55764462246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5B252BA-ECAC-4372-93F2-B55764462246}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5B252BA-ECAC-4372-93F2-B55764462246}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5B252BA-ECAC-4372-93F2-B55764462246}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A0E1920-80C8-4E19-9F2B-21590E03E4B9}
+	EndGlobalSection
+EndGlobal
